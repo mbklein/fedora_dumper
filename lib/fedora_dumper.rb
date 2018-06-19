@@ -1,3 +1,5 @@
 require 'active_record'
+require 'bson'
+require 'json'
 require 'pg'
 require 'fedora_dumper/modeshape_record'
