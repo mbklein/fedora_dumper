@@ -1,6 +1,6 @@
 module FedoraDumper
   class ModeshapeRecord < ActiveRecord::Base
-    self.table = 'modeshape_repository'
+    self.table_name = 'modeshape_repository'
 
     def to_h
       BSON::Document.from_bson(BSON::ByteBuffer.new(content_bytes)).to_h
