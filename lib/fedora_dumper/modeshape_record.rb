@@ -11,7 +11,7 @@ module FedoraDumper
     end
 
     def content_bytes
-      content[2..].to_byte_string
+      content[2..-1].to_byte_string
     end
   end
 end
