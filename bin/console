@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$: << File.expand_path('../../lib', __FILE__)
+require 'fedora_dumper'
+require 'pry'
+
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+pry

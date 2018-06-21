@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-$: << File.expand_path('../..', __FILE__)
+$: << File.expand_path('../../lib', __FILE__)
 require 'fedora_dumper'
 require 'progressbar'
 
-ActiveFedora::Base.establish_connection(ENV['DATABASE_URL'])
-progress = ProgressBar.new(title: 'Dumping', total: FedoraDumper::ModeshapeRecord.count, output: $stderr)
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+progress = ProgressBar.create(title: 'Dumping', total: FedoraDumper::ModeshapeRecord.count, output: $stderr)
 FedoraDumper::ModeshapeRecord.find_each do |record|
   puts record.to_json
   progress.increment
