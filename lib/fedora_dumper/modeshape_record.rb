@@ -30,9 +30,12 @@ module FedoraDumper
       RecursiveOpenStruct.new(to_h)
     end
 
+    def parent_id
+      to_struct.content&.parent
+    end
+
     def parent
-      parent_id = to_struct.content&.parent
-      return nil if parent.nil?
+      return nil if parent_id.nil?
       self.class.find(parent_id)
     end
   end
