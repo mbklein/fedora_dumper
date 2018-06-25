@@ -14,7 +14,7 @@ module FedoraDumper
     end
 
     def fedora_id
-      return nil if key.match?(/jcr:/) || name.blank?
+      return nil if key.nil? || key.match?(/jcr:/) || name.blank?
       return '/rest' if parent.nil?
       [parent.fedora_id, name].join('/')
     end
