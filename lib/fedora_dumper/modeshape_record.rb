@@ -10,7 +10,7 @@ module FedoraDumper
 
     def name
       return '' if parent.nil?
-      parent.to_struct.content.children.find { |c| c.key == key }.name
+      parent.to_struct.content.children.find { |c| c['key'] == key }.name
     end
 
     def fedora_id
