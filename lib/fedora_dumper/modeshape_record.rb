@@ -14,6 +14,7 @@ module FedoraDumper
     end
 
     def fedora_id
+      return nil if name.blank?
       return '/rest' if parent.nil?
       [parent.fedora_id, name].join('/')
     end
