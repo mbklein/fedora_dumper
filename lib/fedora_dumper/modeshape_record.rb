@@ -19,8 +19,12 @@ module FedoraDumper
       [parent.fedora_id, name].join('/')
     end
 
+    def to_bson
+      BSON::Document.from_bson(BSON::ByteBuffer.new(content))
+    end
+
     def to_h
-      BSON::Document.from_bson(BSON::ByteBuffer.new(content)).to_h
+      to_bson.to_h
     end
 
     def to_json
@@ -38,6 +42,21 @@ module FedoraDumper
     def parent
       return nil if parent_id.nil?
       self.class.find(parent_id)
+    end
+
+    def child_ids
+      to_struct.content&.children&.map { |child| child['key'] } || []
+    end
+
+    def children
+      child_ids.map do |id| 
+        self.class.find(id) rescue nil
+      end.compact
+    end
+
+    def traverse(&block)
+      children.map { |child| child.traverse(&block) }
+      yield self
     end
   end
 end
